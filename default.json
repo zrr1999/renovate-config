@@ -1,0 +1,15 @@
+{
+  "extends": ["config:base"],
+  "labels": ["dependencies"],
+  "pin": false,
+  "commitMessagePrefix": "⬆️ deps: ",
+  "dependencyDashboardTitle": "☑️ Dependency Dashboard",
+  "packageRules": [
+    {
+      "groupName": "dependencies (non-major)",
+      "matchUpdateTypes": ["minor", "patch", "pin", "digest"],
+      "automerge": true,
+      "automergeStrategy": "squash"
+    }
+  ]
+}
