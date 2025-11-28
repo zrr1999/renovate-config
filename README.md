@@ -1,4 +1,4 @@
-# github>SigureMo/renovate-config
+# github>zrr1999/renovate-config
 
 My shareable config for Renovate
 
@@ -8,12 +8,12 @@ Enable Renovate in your repo and just extends in renovate.json.
 
 ```jsonc
 {
-   "extends": ["github>SigureMo/renovate-config"]
+   "extends": ["github>zrr1999/renovate-config"]
 }
 ```
 
 ## References
-
--  [Renovate Docs](https://docs.renovatebot.com/)
--  [Config Presets | Renovate Docs](https://docs.renovatebot.com/config-presets/)
--  [@teppeis/renovate-config](https://github.com/teppeis/renovate-config)
+- [SigureMo's config](https://github.com/SigureMo/renovate-config)
+- [Renovate Docs](https://docs.renovatebot.com/)
+- [Config Presets | Renovate Docs](https://docs.renovatebot.com/config-presets/)
+- [@teppeis/renovate-config](https://github.com/teppeis/renovate-config)
