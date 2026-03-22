@@ -6,6 +6,10 @@
   "dependencyDashboardTitle": "☑️ Dependency Dashboard",
   "packageRules": [
     {
+       "matchDatasources": ["python-version"],
+       "enabled": false
+    },
+    {
       "groupName": "dependencies (non-major)",
       "matchUpdateTypes": ["minor", "patch", "pin", "digest"],
       "automerge": true,
