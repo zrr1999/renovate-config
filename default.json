@@ -14,6 +14,20 @@
       "matchUpdateTypes": ["minor", "patch", "pin", "digest"],
       "automerge": true,
       "automergeStrategy": "squash"
+    },
+    {
+      "description": "Align npm updates with pnpm's release-age policy",
+      "matchDatasources": ["npm"],
+      "minimumReleaseAge": "1 day",
+      "internalChecksFilter": "strict"
+    },
+    {
+      "description": "Allow trusted Pi kernel updates immediately",
+      "matchPackageNames": [
+        "@earendil-works/pi-ai",
+        "@earendil-works/pi-tui"
+      ],
+      "minimumReleaseAge": null
     }
   ]
 }
