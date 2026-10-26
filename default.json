@@ -4,10 +4,39 @@
   "pin": true,
   "commitMessagePrefix": "⬆️ deps: ",
   "dependencyDashboardTitle": "☑️ Dependency Dashboard",
+  "customManagers": [
+    {
+      "description": "GitHub hook tags in prek.toml",
+      "customType": "jsonata",
+      "fileFormat": "toml",
+      "managerFilePatterns": ["/(^|/)prek\\.toml$/"],
+      "matchStrings": [
+        "repos[$type(repo) = 'string' and $type(rev) = 'string' and $contains(repo, /^https:\\/\\/github\\.com\\/[^\\/]+\\/[^\\/]+\\/?$/) and $not($contains(rev, /^[a-f0-9]{7,40}$/i))].{\"depName\": $replace($substringAfter(repo, 'https://github.com/'), /\\.git\\/?$|\\/$/, ''), \"currentValue\": rev}"
+      ],
+      "datasourceTemplate": "github-tags",
+      "depTypeTemplate": "prek"
+    },
+    {
+      "description": "GitHub hook SHAs with frozen tag comments in prek.toml",
+      "customType": "regex",
+      "managerFilePatterns": ["/(^|/)prek\\.toml$/"],
+      "matchStrings": [
+        "(?:^|\\r?\\n)[ \\t]*\\[\\[[ \\t]*repos[ \\t]*\\]\\][ \\t]*(?:#[^\\r\\n]*)?\\r?\\n(?:[ \\t]*(?:#[^\\r\\n]*)?\\r?\\n)*[ \\t]*repo[ \\t]*=[ \\t]*[\"']https://github\\.com/(?<depName>[\\w.-]+/[\\w.-]+?)(?:\\.git)?/?[\"'][ \\t]*(?:#[^\\r\\n]*)?\\r?\\n(?:[ \\t]*(?:#[^\\r\\n]*)?\\r?\\n)*[ \\t]*rev[ \\t]*=[ \\t]*[\"'](?<currentDigest>[a-f0-9]{40})[\"'][ \\t]+#[ \\t]*frozen:[ \\t]*(?<currentValue>[^\\s]+)"
+      ],
+      "datasourceTemplate": "github-tags",
+      "depTypeTemplate": "prek"
+    }
+  ],
   "packageRules": [
     {
-       "matchDatasources": ["python-version"],
-       "enabled": false
+      "description": "Keep lychee hook updates on lychee release tags",
+      "matchDepTypes": ["prek"],
+      "matchPackageNames": ["lycheeverse/lychee"],
+      "versioning": "regex:^lychee-v(?<major>\\d+)\\.(?<minor>\\d+)\\.(?<patch>\\d+)$"
+    },
+    {
+      "matchDatasources": ["python-version"],
+      "enabled": false
     },
     {
       "groupName": "dependencies (non-major)",
@@ -23,10 +52,7 @@
     },
     {
       "description": "Allow trusted Pi kernel updates immediately",
-      "matchPackageNames": [
-        "@earendil-works/pi-ai",
-        "@earendil-works/pi-tui"
-      ],
+      "matchPackageNames": ["@earendil-works/pi-ai", "@earendil-works/pi-tui"],
       "minimumReleaseAge": null
     }
   ]
